@@ -1,0 +1,152 @@
+﻿@import 'leaflet/dist/leaflet.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --bg-obsidian: #050B14;
+  --surface-navy: #0B1528;
+  --panel-elevated: #101E36;
+  --border-tech: #1E355B;
+  --cyan-glow: #38BDF8;
+  --vivid-blue: #2563EB;
+  --azure-blue: #0EA5E9;
+  --ice-blue: #7DD3FC;
+  --pale-blue: #BAE6FD;
+  --text-primary: #F0F7FF;
+  --text-secondary: #93B2D6;
+}
+
+body {
+  margin: 0;
+  background-color: #050B14;
+  color: #F0F7FF;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  overflow-x: hidden;
+  /* Monochromatic blue cyber-tech tactical ambient background */
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.06) 0%, transparent 45%),
+    radial-gradient(circle at 100% 100%, rgba(37, 99, 235, 0.05) 0%, transparent 50%),
+    linear-gradient(rgba(30, 53, 91, 0.25) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30, 53, 91, 0.25) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+  background-attachment: fixed;
+}
+
+/* Custom Tactical Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #050B14;
+}
+::-webkit-scrollbar-thumb {
+  background: #1E355B;
+  border-radius: 2px;
+  border: 1px solid rgba(56, 189, 248, 0.1);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #38BDF8;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+}
+
+/* Monochromatic Cyber-tech Mission Control Card Utility */
+.cyber-card {
+  background: linear-gradient(135deg, rgba(11, 21, 40, 0.95) 0%, rgba(16, 30, 54, 0.9) 100%);
+  border: 1px solid #1E355B;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(56, 189, 248, 0.08);
+  backdrop-filter: blur(12px);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cyber-card:hover {
+  border-color: rgba(56, 189, 248, 0.3);
+  box-shadow: 0 12px 35px -5px rgba(0, 0, 0, 0.85), 0 0 15px -3px rgba(56, 189, 248, 0.15);
+}
+
+/* Elevated Command Panel */
+.cyber-panel-elevated {
+  background: #101E36;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  box-shadow: 0 15px 40px -8px rgba(0, 0, 0, 0.9), 0 0 20px -4px rgba(56, 189, 248, 0.1);
+}
+
+/* Monochromatic Blue Glow Utilities */
+.glow-cyan-border {
+  border: 1px solid #38BDF8 !important;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.35) !important;
+}
+
+.glow-vivid-border {
+  border: 1px solid #2563EB !important;
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.5) !important;
+}
+
+.glow-ice-border {
+  border: 1px solid #7DD3FC !important;
+  box-shadow: 0 0 12px rgba(125, 211, 252, 0.35) !important;
+}
+
+.glow-azure-border {
+  border: 1px solid #0EA5E9 !important;
+  box-shadow: 0 0 12px rgba(14, 165, 233, 0.35) !important;
+}
+
+/* Mission Control HUD Accent Header */
+.hud-corner {
+  position: relative;
+}
+.hud-corner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid #38BDF8;
+  border-left: 2px solid #38BDF8;
+  pointer-events: none;
+}
+.hud-corner::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  border-bottom: 2px solid #38BDF8;
+  border-right: 2px solid #38BDF8;
+  pointer-events: none;
+}
+
+/* Leaflet dark theme customization */
+.leaflet-container {
+  background: #050B14 !important;
+  font-family: inherit;
+}
+.leaflet-tile {
+  filter: brightness(0.55) invert(1) contrast(3.2) hue-rotate(205deg) saturate(0.25) brightness(0.65);
+}
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+  background: #101E36 !important;
+  color: #F0F7FF !important;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.9), 0 0 15px rgba(56, 189, 248, 0.2);
+  border-radius: 8px;
+}
+.leaflet-popup-content {
+  margin: 12px 14px;
+  line-height: 1.4;
+}
+
+/* Pulse radar ring */
+@keyframes pulse-ring {
+  0% { transform: scale(0.6); opacity: 0.95; }
+  50% { transform: scale(1.4); opacity: 0.35; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.radar-ping-ring {
+  animation: pulse-ring 1.8s infinite cubic-bezier(0.2, 0.8, 0.2, 1);
+}

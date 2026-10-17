@@ -1,0 +1,12 @@
+{
+  "name": "ers-delhi",
+  "version": "1.0.0",
+  "description": "ERS — Emergency Response Synchronization System for Delhi",
+  "private": true,
+  "scripts": {
+    "start": "START.bat",
+    "build": "cd frontend && npm run build",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && python -m uvicorn main:app --reload --port 8000"
+  }
+}
