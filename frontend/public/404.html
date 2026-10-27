@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>AXIOM EMS</title>
+    <script>
+      // GitHub Pages SPA redirect trick:
+      // Store the full path in sessionStorage, then redirect to index.html
+      // index.html will pick it up and restore the correct route
+      var l = window.location;
+      sessionStorage.redirect = l.href;
+      l.replace(l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + l.pathname.split('/').slice(0, 2).join('/') + '/?p=1');
+    </script>
+  </head>
+  <body></body>
+</html>
