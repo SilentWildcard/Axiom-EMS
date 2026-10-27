@@ -1,4 +1,6 @@
 // API client — fetch wrapper pointing to AXIOM EMS backend
+// On GitHub Pages the backend won't be running, so all requests gracefully
+// fall back to error/loading states without crashing.
 const API_BASE = (import.meta.env.VITE_API_URL as string | undefined) ?? 'http://localhost:8000';
 
 export class ApiError extends Error {
@@ -24,7 +26,7 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
     return res.json() as Promise<T>;
   } catch (err) {
     if (err instanceof ApiError) throw err;
-    throw new ApiError('Network error — backend may be offline', 0);
+    throw new ApiError('Backend offline — run the FastAPI server locally to connect', 0);
   }
 }
 
