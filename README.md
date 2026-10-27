@@ -148,8 +148,6 @@ Axxiiom EMS/
 ## Manual Steps Required
 
 1. **GitHub**: `git push -u origin main` (authenticate with your GitHub credentials)
-2. **Vercel**: Go to https://vercel.com → Import project → Set `VITE_API_URL`
-3. **Render**: Go to https://render.com → New Web Service → Connect repo → Use `render.yaml`
 
 ---
 
