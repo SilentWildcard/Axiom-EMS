@@ -1,162 +1,149 @@
 # AXIOM EMS — Smart City & Mobility Emergency Ambulance Coordination System
 
-> **SIMULATION MODE** — No live GPS or traffic APIs required. All data is synthesized.
+<div align="center">
 
-Demo Link : https://SilentWildcard.github.io/Axiom-EMS/
+[![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-GitHub%20Pages-brightgreen?style=for-the-badge&logo=githubpages&logoColor=white)](https://silentwildcard.github.io/Axiom-EMS/)
+[![GitHub Pages CI/CD](https://img.shields.io/github/actions/workflow/status/SilentWildcard/Axiom-EMS/deploy.yml?branch=main&label=Deploy%20Status&style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/SilentWildcard/Axiom-EMS/actions/workflows/deploy.yml)
+[![FastAPI Backend](https://img.shields.io/badge/Backend-FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)](backend/)
+[![React Frontend](https://img.shields.io/badge/Frontend-React%2018%20%2B%20Vite-61DAFB?style=for-the-badge&logo=react&logoColor=black)](frontend/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
-## Overview
+### 🚨 **Operational Emergency Response & Traffic Synchronization Grid**
+**AI/ML + IoT Roadside Infrastructure Coordination for Delhi Arterial Corridors**
 
-AXIOM EMS is an AI/ML-powered full-stack ambulance coordination platform with:
-- Real-time mission tracking and checkpoint management
-- Synthesized electronic siren control (Web Audio API)
-- IoT device monitoring (Traffic Light, Siren Unit, GPS Tracker)
-- SVG-based route visualization (no external map API)
-- Two-stage checkpoint alert workflow
-- Police acknowledgement system
-- Analytics dashboard
-
-## Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React 18 + TypeScript + Tailwind CSS + Vite |
-| Backend | FastAPI + Python + Pydantic |
-| Audio | Web Audio API (synthesized tones only) |
-| Storage | In-memory (demo data seeded on startup) |
+</div>
 
 ---
 
-## Quick Start
+## 🌐 Live Deployments & Links
 
-### Backend
+| Target | Deployment Link | Platform | Description |
+| :--- | :--- | :--- | :--- |
+| **Production Web App** | [**https://silentwildcard.github.io/Axiom-EMS/**](https://silentwildcard.github.io/Axiom-EMS/) | GitHub Pages | Live interactive mission simulator & command desk (Zero installation needed) |
+| **Frontend CI/CD** | [**GitHub Actions Workflow**](https://github.com/SilentWildcard/Axiom-EMS/actions/workflows/deploy.yml) | GitHub Actions | Automated build & deploy pipeline on push to `main` |
+| **Backend API** | Ready for [Render](https://render.com) via `backend/render.yaml` | Render / Local | FastAPI microservice with telemetry WebSocket & simulation engine |
 
+> 💡 **Instant Evaluation:** Click [**https://silentwildcard.github.io/Axiom-EMS/**](https://silentwildcard.github.io/Axiom-EMS/) to run the live simulation right in your browser. All route coords, siren audio, crowd prediction models, and IoT device states are fully synthesized client-side.
+
+---
+
+## 🌟 Key Capabilities & Innovative Features
+
+- **🗺️ Delhi Arterial Corridor Simulation (Connaught Place to LNJP Hospital):**
+  - Dynamic route tracing across Barakhamba, Mandi House, Tilak Marg, and ITO Chowk.
+  - Interactive SVG map tracking ambulance telemetry, distance covered, speed, and real-time ETA.
+- **🔊 Synthesized Electronic Siren Control:**
+  - Browser-native Web Audio API dual-tone siren oscillator (700Hz–1100Hz sweep).
+  - No external audio files or copyright dependencies.
+- **📊 Real-Time Patient Vitals Monitor:**
+  - Live telemetry dashboard tracking Heart Rate (HR), SpO2, Blood Pressure (SBP/DBP), and Respiratory Rate (RR) inside Ambulance AMB-042.
+- **🧠 Predictive AI Crowd & Congestion Forecaster:**
+  - Dynamic congestion prediction scoring for high-density junctions.
+  - Advance alert trigger when ambulance is within preemption distance (<650m).
+- **🚦 Green Wave Optimizer & Corridor Efficiency Score:**
+  - Automated traffic signal preemption recommendations for Delhi Police traffic posts.
+  - Real-time scoring out of 100 assessing clearance rate and response speed.
+- **🚔 Traffic Police Desk & Radio Dispatch Log:**
+  - Instant traffic police acknowledgement unit for emergency clearance.
+  - Live police radio event log and field officer dispatch status.
+- **📡 IoT Roadside Unit (RSU) Coordination:**
+  - Real-time status for Traffic Signal Controllers, Roadside Sirens, and Vehicle GPS nodes.
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology | Purpose |
+| :--- | :--- | :--- |
+| **Frontend** | React 18, TypeScript, Vite, Tailwind CSS | High-performance mission command UI & interactive SVG maps |
+| **Audio Engine** | Web Audio API (Sawtooth oscillators) | Browser-synthesized emergency sirens and chimes |
+| **Backend** | FastAPI, Python 3.11+, Pydantic, Uvicorn | Telemetry processing, mission endpoints & analytics |
+| **Storage** | In-memory with seed fixtures | Rapid testing, isolated simulation states |
+| **DevOps & CI/CD** | GitHub Actions, GitHub Pages, Vercel config | Continuous integration & static edge deployment |
+
+---
+
+## 🚀 Quick Start (Local Development)
+
+### 1. Prerequisites
+- Node.js 18+ / 20+
+- Python 3.10+
+
+### 2. Frontend Setup
 ```bash
-cd backend
-pip install -r requirements.txt
-uvicorn main:app --reload --port 8000
-# API available at http://localhost:8000
-# Docs at http://localhost:8000/docs
-```
-
-Or on PowerShell:
-```powershell
-cd backend
-.\start.ps1
-```
-
-### Frontend
-
-```bash
+# Navigate to frontend directory
 cd frontend
-npm install
+
+# Install dependencies
+npm install --legacy-peer-deps
+
+# Start Vite dev server
 npm run dev
-# App available at http://localhost:5173
+# -> Local app accessible at http://localhost:5173
+```
+
+### 3. Backend Setup (Optional for Full API Mode)
+```bash
+# Navigate to backend directory
+cd backend
+
+# Install python dependencies
+pip install -r requirements.txt
+
+# Start FastAPI server
+uvicorn main:app --reload --port 8000
+# -> API running at http://localhost:8000
+# -> Interactive OpenAPI docs at http://localhost:8000/docs
 ```
 
 ---
 
-## Environment Variables
+## 📡 Backend API Endpoints
 
-### Frontend (`.env` in `frontend/`)
-
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `VITE_API_URL` | Backend base URL | `http://localhost:8000` |
-
-### Backend
-
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `TINYFISH_API_KEY` | TinyFish AI integration | No |
-
----
-
-## Project Structure
-
-```
-Axxiiom EMS/
-├── frontend/               # React 18 + TypeScript + Tailwind
-│   ├── src/
-│   │   ├── api/            # API client, types, custom hooks
-│   │   ├── components/     # UI components
-│   │   │   ├── Alerts/     # SirenControl ← priority component
-│   │   │   ├── Ambulance/  # Tracker, ETA, Checkpoints
-│   │   │   ├── Analytics/  # SVG charts dashboard
-│   │   │   ├── Dashboard/  # Mission header, status cards
-│   │   │   ├── IoT/        # Device panel, event log
-│   │   │   ├── Layout/     # Navbar, Sidebar
-│   │   │   ├── Map/        # SVG simulation map
-│   │   │   ├── Police/     # Acknowledgement panel
-│   │   │   └── Simulation/ # Controls
-│   │   ├── hooks/          # useAudio (Web Audio API siren)
-│   │   ├── pages/          # Dashboard, Alerts, IoT, Analytics, Settings
-│   │   └── utils/          # ETA, audio, formatters
-│   └── vercel.json
-└── backend/
-    ├── main.py             # FastAPI app, all endpoints
-    ├── requirements.txt
-    ├── start.ps1
-    ├── start.sh
-    └── render.yaml
-```
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/api/health` | Service health status |
+| `GET` | `/api/missions` | Retrieve active emergency missions |
+| `GET` | `/api/missions/{id}/checkpoints` | List ordered mission route checkpoints |
+| `GET` | `/api/missions/{id}/eta` | Real-time distance and ETA calculations |
+| `GET` | `/api/iot/devices` | Query connected IoT devices (RSUs, signals, beacons) |
+| `GET` | `/api/iot/events` | Stream recent IoT roadside events |
+| `GET` | `/api/simulation/state` | Current simulation status and progress |
+| `POST`| `/api/simulation/start` | Start or resume simulation engine |
+| `POST`| `/api/simulation/stop` | Pause active simulation |
+| `POST`| `/api/simulation/advance` | Step ambulance forward to next checkpoint |
+| `POST`| `/api/simulation/reset` | Reset corridor state to Connaught Place origin |
+| `GET` | `/api/analytics` | Clearance efficiency & alert latency metrics |
 
 ---
 
-## API Endpoints
+## ☁️ Deployment Guide
 
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/health` | Health check |
-| GET | `/api/missions` | List missions |
-| GET | `/api/missions/{id}` | Get mission |
-| POST | `/api/missions` | Create mission |
-| GET | `/api/missions/{id}/checkpoints` | List checkpoints |
-| GET | `/api/missions/{id}/eta` | Calculate ETA (`d / (v/3.6)`) |
-| GET | `/api/alert-config` | Get alert config |
-| PUT | `/api/alert-config` | Update alert config |
-| GET | `/api/alerts` | List alerts |
-| POST | `/api/alerts` | Record alert event |
-| GET | `/api/iot/devices` | List IoT devices |
-| GET | `/api/iot/events` | IoT event log (last 50) |
-| POST | `/api/iot/events` | Log IoT event |
-| GET | `/api/simulation/state` | Simulation state |
-| POST | `/api/simulation/start` | Start simulation |
-| POST | `/api/simulation/stop` | Stop simulation |
-| POST | `/api/simulation/advance` | Advance checkpoint |
-| POST | `/api/simulation/reset` | Reset simulation |
-| GET | `/api/analytics` | Analytics data |
+### Option 1: GitHub Pages (Currently Active)
+Deployment is fully automated using GitHub Actions (`.github/workflows/deploy.yml`):
+- Whenever code is pushed to `main`, GitHub Actions installs dependencies, builds the Vite production bundle, copies `index.html` to `404.html` for SPA routing, and deploys directly to GitHub Pages.
+- **Active URL:** `https://silentwildcard.github.io/Axiom-EMS/`
+
+### Option 2: Vercel Deployment (One-Click)
+The repository includes a ready-to-deploy root `vercel.json` configuration:
+1. Log in to [Vercel](https://vercel.com) and click **"Add New Project"**.
+2. Select repository `SilentWildcard/Axiom-EMS`.
+3. Click **Deploy**. Vercel will automatically build the frontend with SPA routing rewrites.
+
+### Option 3: Backend Deployment (Render)
+The repository includes `backend/render.yaml` for Render Web Service deployment:
+1. Go to [Render](https://render.com) and select **New > Web Service**.
+2. Connect `SilentWildcard/Axiom-EMS` and specify Root Directory `backend`.
+3. Set build command `pip install -r requirements.txt` and start command `uvicorn main:app --host 0.0.0.0 --port $PORT`.
 
 ---
 
-## Deployment
+## 🔊 Audio & Autoplay Notice
 
-### Frontend → Vercel
-
-1. Connect GitHub repo to Vercel
-2. Set `VITE_API_URL` env var to your backend URL
-3. Deploy — `vercel.json` handles SPA routing
-
-### Backend → Render
-
-1. Connect GitHub repo to Render
-2. Use `backend/render.yaml` for service config
-3. Add `TINYFISH_API_KEY` secret if using TinyFish integration
-4. Deploy — backend auto-starts on port `$PORT`
+The ambulance siren and notification chimes use the browser's native **Web Audio API** (custom frequency oscillators). No recorded media is fetched. Modern web browsers require a user interaction (such as clicking **"Resume / Start"** or activating the siren button) before web audio starts playing.
 
 ---
 
-## Manual Steps Required
+## 📄 License
 
-1. **GitHub**: `git push -u origin main` (authenticate with your GitHub credentials)
-
----
-
-## Audio Note
-
-The siren uses Web Audio API oscillators (sawtooth wave, 700–900 Hz sweep, 2.5 Hz rate). No recordings, no copyrighted audio. Browser autoplay policy may block audio until user interaction.
-
----
-
-## License
-
-MIT
+This project is licensed under the [MIT License](LICENSE).

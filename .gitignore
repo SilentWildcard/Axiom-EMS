@@ -2,6 +2,7 @@ node_modules/
 __pycache__/
 *.pyc
 .env
+.env.*
 .env.local
 dist/
 build/
@@ -12,3 +13,5 @@ venv/
 Thumbs.db
 *.log
 .cache/
+frontend/android/
+frontend/capacitor.config.ts
