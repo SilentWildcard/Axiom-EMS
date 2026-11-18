@@ -173,7 +173,41 @@ const Sparkline: React.FC<{ data: number[]; color: string; min: number; max: num
 
 // ─── MAIN APP ──────────────────────────────────────────────────────────────
 export default function App() {
-  const [tab, setTab] = useState<Tab>('live');
+  const getInitialTab = (): Tab => {
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash.replace('#', '').toLowerCase();
+      if (['hardware', 'twin', 'iot'].includes(hash)) return 'hardware';
+      const params = new URLSearchParams(window.location.search);
+      const tabParam = params.get('tab')?.toLowerCase();
+      if (['hardware', 'twin', 'iot'].includes(tabParam || '')) return 'hardware';
+      if (['live', 'police', 'stops', 'command', 'controls', 'hardware'].includes(tabParam || '')) {
+        return tabParam as Tab;
+      }
+    }
+    return 'live';
+  };
+
+  const [tab, setTabState] = useState<Tab>(getInitialTab);
+
+  const setTab = useCallback((newTab: Tab) => {
+    setTabState(newTab);
+    if (typeof window !== 'undefined') {
+      window.location.hash = newTab;
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '').toLowerCase();
+      if (['hardware', 'twin', 'iot'].includes(hash)) {
+        setTabState('hardware');
+      } else if (['live', 'police', 'stops', 'command', 'controls'].includes(hash)) {
+        setTabState(hash as Tab);
+      }
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
   const [stops, setStops] = useState<StopMut[]>(STOPS.map(s => ({ ...s })));
   const [isSimulating, setIsSimulating] = useState(true);
   const [simSpeed, setSimSpeed] = useState(1);
