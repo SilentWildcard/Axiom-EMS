@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { STOPS, ROUTE_COORDS, TOTAL_KM, IOT_DEVICES, type Stop } from './data/delhiData';
+import { HardwareSimulationLab } from './components/HardwareLab/HardwareSimulationLab';
 
 // ─── AUDIO ─────────────────────────────────────────────────────────────────
 let audioCtx: AudioContext | null = null;
@@ -25,7 +26,7 @@ function playChime(freq1 = 800, freq2 = 1100) {
 }
 
 // ─── TYPES ─────────────────────────────────────────────────────────────────
-type Tab = 'live' | 'police' | 'stops' | 'command' | 'controls';
+type Tab = 'live' | 'police' | 'stops' | 'command' | 'controls' | 'hardware';
 type StopMut = Stop & { status: 'resolved' | 'pending'; light: 'green' | 'yellow' | 'red'; crowd: string };
 
 interface Vitals { hr: number; spo2: number; sbp: number; dbp: number; rr: number; }
@@ -403,6 +404,7 @@ export default function App() {
     { id: 'police',   icon: '🛡️', label: 'Police Action Desk',     badge: pendingCount > 0 ? `${pendingCount} PENDING` : 'ALL CLEAR', badgeCls: pendingCount > 0 ? 'bg-red-500/20 text-red-400 border border-red-500/40 animate-pulse' : 'bg-emerald-500/20 text-emerald-400' },
     { id: 'stops',    icon: '🚦', label: 'Red Light Stops',        badge: '6 STOPS',                      badgeCls: 'bg-slate-800 text-slate-400' },
     { id: 'command',  icon: '🧠', label: 'AI Command Centre',      badge: 'NEW',                          badgeCls: 'bg-purple-500/20 text-purple-300 border border-purple-500/30' },
+    { id: 'hardware', icon: '🔬', label: 'Hardware Simulation Lab', badge: 'IoT TWIN',                     badgeCls: 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 animate-pulse' },
     { id: 'controls', icon: '🎛️', label: 'Corridor Simulator',     badge: 'DEMO',                        badgeCls: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30' },
   ];
 
@@ -1055,6 +1057,8 @@ export default function App() {
               </div>
             </div>
           )}
+          {/* ── TAB 6: HARDWARE SIMULATION LAB ─────────────── */}
+          {tab === 'hardware' && <HardwareSimulationLab />}
         </main>
       </div>
 
